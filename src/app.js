@@ -1,20 +1,3 @@
-// const express = require('express');
-// const bodyParser = require('body-parser');
-// const db = require('./models');
-// const authRoutes = require('./routes/auth');
-// const organisationRoutes = require('./routes/organisations');
-
-// const app = express();
-
-// app.use(bodyParser.json());
-
-// app.use('/auth', authRoutes);
-// app.use('/api', organisationRoutes);
-
-// db.sequelize.sync();
-
-// module.exports = app;
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const db = require('./models');
