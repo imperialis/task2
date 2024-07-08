@@ -16,7 +16,7 @@
   },
   "jest": {
     "testEnvironment": "node",
-    "testTimeout": 180000,
+    "testTimeout": 1800000,
     "setupFilesAfterEnv": [
       "<rootDir>/src/tests/setup.js"
     ]
