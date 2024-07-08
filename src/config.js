@@ -9,8 +9,8 @@ module.exports = {
     host: process.env.DB_HOST ,
     port: process.env.DB_PORT,
     dialect: 'postgres',
-    //dialectOptions: {
-      //ssl: { rejectUnauthorized: false } // Only if your PostgreSQL instance requires SSL
-    //}
+    dialectOptions: {
+      ssl: { rejectUnauthorized: false } // Only if your PostgreSQL instance requires SSL
+    }
   }
 };
