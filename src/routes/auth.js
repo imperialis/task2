@@ -1,5 +1,13 @@
 
+// require('dotenv').config();
 
+// console.log('SECRET:', process.env.SECRET);
+// console.log('JWT_SECRET:', process.env.JWT_SECRET);
+// console.log('DB_USERNAME:', process.env.DB_USERNAME);
+// console.log('DB_PASSWORD:', process.env.DB_PASSWORD);
+// console.log('DB_NAME:', process.env.DB_NAME);
+// console.log('DB_HOST:', process.env.DB_HOST);
+// console.log('DB_PORT:', process.env.DB_PORT);
 
 const express = require('express');
 const jwt = require('jsonwebtoken');
@@ -20,6 +28,9 @@ router.post('/register', async (req, res) => {
     });
   }
 
+  console.table(config)
+  console.log("this is the result",config.jwtSecret)
+
 
   const userId = uuidv4(); // Generate UUID for userId
 
@@ -27,6 +38,7 @@ router.post('/register', async (req, res) => {
     
       // Check if user already exists
       const existingUser = await db.User.findOne({ where: { email } });
+      console.log(existingUser)
       if (existingUser) {
         return res.status(400).json({
           status: 'Bad request',
@@ -42,7 +54,11 @@ router.post('/register', async (req, res) => {
 
     // Generate token with expiry
     const expiresIn = '30s'; // Token expires in 1 hour
+    // const token = jwt.sign({ userId: user.userId }, config.jwtSecret, { expiresIn });
     const token = jwt.sign({ userId: user.userId }, config.jwtSecret, { expiresIn });
+
+
+    console.log("this is the data >>>>>>>>>>>>>>>>>>>>>>>>>>.",process.env.JWT_SECRET)
 
     res.status(201).json({
       status: 'success',
