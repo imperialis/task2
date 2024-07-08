@@ -41,7 +41,7 @@ router.post('/register', async (req, res) => {
     await user.addOrganisation(org);
 
     // Generate token with expiry
-    const expiresIn = '30s'; // Token expires in 1 hour
+    const expiresIn = 'o.5h'; // Token expires in 1 hour
     const token = jwt.sign({ userId: user.userId }, config.jwtSecret, { expiresIn });
 
     res.status(201).json({
@@ -83,7 +83,7 @@ router.post('/login', async (req, res) => {
     }
 
     // Generate token with expiry
-    const expiresIn = '30s'; // Token expires in 1 hour
+    const expiresIn = '0.5h'; // Token expires in 1 hour
     const token = jwt.sign({ userId: user.userId }, config.jwtSecret, { expiresIn });
 
     res.status(200).json({
