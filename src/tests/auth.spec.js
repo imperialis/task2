@@ -13,6 +13,17 @@ let userId;
 
 describe('Token Generation', () => {
     it('should generate a valid token with correct expiry', async () => {
+
+      const newUser = await request(app)
+      .post('/auth/register')
+      .send({
+        firstName: 'Jake',
+        lastName: 'Doe',
+        email: 'jake.doe@example.com',
+        password: 'password123',
+        phone: '1234567890',
+      });
+
       const res = await request(app)
         .post('/auth/login')
         .send({
@@ -32,10 +43,12 @@ describe('Token Generation', () => {
       expect(decoded.userId).toBe(userid);
   
       // Wait for token to expire (1 hour + some buffer time)
-      await new Promise(resolve => setTimeout(resolve, 36000));
+      await new Promise(resolve => setTimeout(resolve, 30000));
   
       // Attempt to access a protected endpoint with expired token
       const expiredToken = res.body.data.accessToken;
+
+      //const expiredToken = null;
       const expiredRes = await request(app)
         .get(`/api/users/${userId}`)
         .set('Authorization', `Bearer ${expiredToken}`);
