@@ -1,6 +1,6 @@
 # Task 2
 
-A comprehensive Node.js API for user authentication and organization management using Express, Sequelize, and PostgreSQL.
+A Node.js API for user authentication and organization management using Express, Sequelize, and PostgreSQL.
 
 ## Table of Contents
 
