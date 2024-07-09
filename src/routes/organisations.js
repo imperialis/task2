@@ -34,7 +34,7 @@ router.use((req, res, next) => {
   }
 });
 
-router.post('api/organisations', async (req, res) => {
+router.post('/organisations', async (req, res) => {
   const { name, description } = req.body;
 
   if (!name) {
@@ -70,7 +70,7 @@ router.post('api/organisations', async (req, res) => {
   }
 });
 
-router.get('api/organisations', async (req, res) => {
+router.get('/organisations', async (req, res) => {
   const user = await db.User.findByPk(req.userId, {
     include: db.Organisation
   });
@@ -84,7 +84,7 @@ router.get('api/organisations', async (req, res) => {
   });
 });
 
-router.get('api/organisations/:orgId', async (req, res) => {
+router.get('/organisations/:orgId', async (req, res) => {
   const { orgId } = req.params;
   const user = await db.User.findByPk(req.userId, {
     include: db.Organisation
@@ -107,7 +107,7 @@ router.get('api/organisations/:orgId', async (req, res) => {
   });
 });
 
-router.post('api/organisations/:orgId/users', async (req, res) => {
+router.post('/organisations/:orgId/users', async (req, res) => {
   const { orgId } = req.params;
   const { userId } = req.body;
 
