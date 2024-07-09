@@ -5,18 +5,18 @@ const config = require('../config');
 
 const router = express.Router();
 
-router.use((req, res, next) => {
-  const validRoutes = ['/:id'];
-  const routePath = req.path.split('/').filter(Boolean).join('/');
-  if (!validRoutes.some(route => route === '/' + routePath)) {
-    return res.status(404).json({
-      status: 'error',
-      message: 'Resource not found',
-      statusCode: 404
-    });
-  }
-  next();
-});
+// router.use((req, res, next) => {
+//   const validRoutes = ['/:id'];
+//   const routePath = req.path.split('/').filter(Boolean).join('/');
+//   if (!validRoutes.some(route => route === '/' + routePath)) {
+//     return res.status(404).json({
+//       status: 'error',
+//       message: 'Resource not found',
+//       statusCode: 404
+//     });
+//   }
+//   next();
+// });
 
 // Middleware to verify JWT token
 router.use((req, res, next) => {
@@ -37,7 +37,7 @@ router.use((req, res, next) => {
 });
 
 // GET user's own record or user record in organisations they belong to or created
-router.get('/:id', async (req, res) => {
+router.get('api/users/:id', async (req, res) => {
   const { id } = req.params;
 
   try {
