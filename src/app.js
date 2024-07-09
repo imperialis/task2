@@ -33,6 +33,13 @@ db.sequelize.sync().then(async () => {
     console.error('Error syncing database:', error);
   }
 });
+app.use((req, res, next) => {
+  res.status(404).json({
+    status: 'error',
+    message: 'Resource not found',
+    statusCode: 404
+  });
+});
 
 module.exports = app;
 
