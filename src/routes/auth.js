@@ -17,7 +17,7 @@ const { v4: uuidv4 } = require('uuid');
 
 const router = express.Router();
 
-Middleware to check if route exists
+//Middleware to check if route exists
 router.use((req, res, next) => {
   const validRoutes = ['/register', '/login'];
   if (!validRoutes.includes(req.path)) {
