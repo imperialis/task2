@@ -13,9 +13,9 @@ app.use(bodyParser.json());
 // app.use('/auth', authRoutes);
 // app.use('/api', organisationRoutes);
 // app.use('/api/users', userRoutes);
-app.use(authRoutes);
-app.use(organisationRoutes);
-app.use(userRoutes);
+app.use('/',authRoutes);
+app.use('/',organisationRoutes);
+app.use('/', userRoutes);
 // Sync Sequelize models with the database
 db.sequelize.sync().then(async () => {
   try {
