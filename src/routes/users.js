@@ -5,6 +5,19 @@ const config = require('../config');
 
 const router = express.Router();
 
+router.use((req, res, next) => {
+  const validRoutes = ['/:id'];
+  const routePath = req.path.split('/').filter(Boolean).join('/');
+  if (!validRoutes.some(route => route === '/' + routePath)) {
+    return res.status(404).json({
+      status: 'error',
+      message: 'Resource not found',
+      statusCode: 404
+    });
+  }
+  next();
+});
+
 // Middleware to verify JWT token
 router.use((req, res, next) => {
   const token = req.headers['authorization']?.split(' ')[1];
