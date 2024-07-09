@@ -37,7 +37,7 @@ router.use((req, res, next) => {
 });
 
 // GET user's own record or user record in organisations they belong to or created
-router.get('api/users/:id', async (req, res) => {
+router.get('/:id', async (req, res) => {
   const { id } = req.params;
 
   try {
