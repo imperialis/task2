@@ -7,6 +7,18 @@ const { v4: uuidv4 } = require('uuid');
 const router = express.Router();
 
 router.use((req, res, next) => {
+  const validRoutes = ['/organisations', `/organisations/${req.params.orgId}`, `/organisations/${req.params.orgId}/users`];
+  if (!validRoutes.includes(req.path)) {
+    return res.status(404).json({
+      status: 'error',
+      message: 'Resource not found',
+      statusCode: 404
+    });
+  }
+  next();
+});
+
+router.use((req, res, next) => {
   const token = req.headers['authorization']?.split(' ')[1];
 
   if (!token) {
