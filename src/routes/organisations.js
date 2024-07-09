@@ -6,17 +6,17 @@ const { v4: uuidv4 } = require('uuid');
 
 const router = express.Router();
 
-router.use((req, res, next) => {
-  const validRoutes = ['/organisations', `/organisations/${req.params.orgId}`, `/organisations/${req.params.orgId}/users`];
-  if (!validRoutes.includes(req.path)) {
-    return res.status(404).json({
-      status: 'error',
-      message: 'Resource not found',
-      statusCode: 404
-    });
-  }
-  next();
-});
+// router.use((req, res, next) => {
+//   const validRoutes = ['/organisations', `/organisations/${req.params.orgId}`, `/organisations/${req.params.orgId}/users`];
+//   if (!validRoutes.includes(req.path)) {
+//     return res.status(404).json({
+//       status: 'error',
+//       message: 'Resource not found',
+//       statusCode: 404
+//     });
+//   }
+//   next();
+// });
 
 router.use((req, res, next) => {
   const token = req.headers['authorization']?.split(' ')[1];
@@ -34,7 +34,7 @@ router.use((req, res, next) => {
   }
 });
 
-router.post('/organisations', async (req, res) => {
+router.post('api/organisations', async (req, res) => {
   const { name, description } = req.body;
 
   if (!name) {
@@ -70,7 +70,7 @@ router.post('/organisations', async (req, res) => {
   }
 });
 
-router.get('/organisations', async (req, res) => {
+router.get('api/organisations', async (req, res) => {
   const user = await db.User.findByPk(req.userId, {
     include: db.Organisation
   });
@@ -84,7 +84,7 @@ router.get('/organisations', async (req, res) => {
   });
 });
 
-router.get('/organisations/:orgId', async (req, res) => {
+router.get('api/organisations/:orgId', async (req, res) => {
   const { orgId } = req.params;
   const user = await db.User.findByPk(req.userId, {
     include: db.Organisation
@@ -107,7 +107,7 @@ router.get('/organisations/:orgId', async (req, res) => {
   });
 });
 
-router.post('/organisations/:orgId/users', async (req, res) => {
+router.post('api/organisations/:orgId/users', async (req, res) => {
   const { orgId } = req.params;
   const { userId } = req.body;
 
